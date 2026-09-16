@@ -1,24 +1,64 @@
-﻿string name = "Bob";
-int num = 3;
-double temp = 34.4;
+﻿//int fahrenheit = 94; //华氏度
 
-string text = $"Hello, \t\t{name}! You have {num} messages in your inbox. The temperature is {temp} celsius.";
+//摄氏度 = (华氏度 - 32) x 5 / 9
+//5和9默认是整数int，需要转换成小数才可以让计算结果是小数
+//decimal celsius = (fahrenheit - 32) * 5m / 9m;
 
-//Console.WriteLine(text);
-//Console.Write(@"C:       user\zzhplus\invoices");
-//Console.WriteLine("h \"a\"");
-//Console.WriteLine("c:\\source\\repos");
+//Console.WriteLine($"The temperature is {celsius.ToString("F1")} Celsius.");
 
-string projectName = "ACME";
+//Console.WriteLine("Windows " + 1 + 1);
+//Console.WriteLine(5m / 10m);
 
-string russianMessage = "\u041f\u043e\u0441\u043c\u043e\u0442\u0440\u0435\u0442\u044c \u0440\u0443\u0441\u0441\u043a\u0438\u0439 \u0432\u044b\u0432\u043e\u0434";
 
-Console.WriteLine($"View English output:\n\tc:\\Exercise\\{projectName}\\data.txt\n");
+////Sophia: 93, 87, 98, 95, 100
 
-Console.WriteLine($"{russianMessage}:\n\tc:\\Exercise\\{projectName}\\ru-RU\\data.txt");
+//Nicolas: 80, 83, 82, 88, 85
 
-//View English output:
-//  c:\Exercise\ACME\data.txt
+//Zahirah: 84, 96, 73, 85, 79
 
-//Посмотреть русский вывод:
-//  c:\Exercise\ACME\ru-RU\data.txt
+//Jeong: 90, 92, 98, 100, 97
+
+//初始化成绩列表
+List<int> num0 = new List<int>
+{
+    93, 87, 98, 95, 100
+};
+List<int> num1 = new List<int>
+{
+    80, 83, 82, 88, 85
+};
+List<int> num2 = new List<int>
+{
+    84, 96, 73, 85, 79
+};
+List<int> num3 = new List<int>
+{
+    90, 92, 98, 100, 97
+};
+
+//存入字典数值
+Dictionary<string, List<int>> nameList = new Dictionary<string, List<int>>
+{
+    { "Sophia", num0 },
+    { "Nicolas", num1 },
+    { "Zahirah", num2 },
+    { "Jeong", num3 }
+};
+
+double avgScore;//平均分
+char rating;//评分等级 A or B
+
+Console.WriteLine("Studeng\t\tGrade");
+foreach (var item in nameList)
+{
+    avgScore = item.Value.Average();
+    if (avgScore >= 90)
+    {
+        rating = 'A';
+    }
+    else
+    {
+        rating = 'B';
+    }
+    Console.WriteLine(item.Key + "\t\t" + avgScore + " " + rating);
+}
