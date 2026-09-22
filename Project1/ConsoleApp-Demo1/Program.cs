@@ -181,18 +181,58 @@ else if (days <= 10)
 #endregion
 #endif
 
+using ConsoleApp_Demo1;
+using System;
+
 class Program
 {
     public static void Main()
     {
-        string[] orders = { "B123", "C234", "A345", "C15", "B177", "G3003", "C235", "B179" };
-        foreach (var item in orders)
-        {
-            if (item.StartsWith("B"))
-            {
-                Console.WriteLine(item);
-            }
-        }
 
+        Console.Write("输入学生人数：");
+        int studentNum = Convert.ToInt32(Console.ReadLine());
+        List<Student> studentList = new List<Student>();
+        for (int i = 1; i <= studentNum; i++)
+        {
+            Console.Write($"输入第{i}位学生的名字：");
+            string? input = Console.ReadLine();
+            string name = string.IsNullOrWhiteSpace(input) ? "无名氏" : input;
+            int[] scoreArr = new int[5];
+            for (int j = 0; j < scoreArr.Length; j++)
+            {
+                Console.Write($"输入第{j + 1}次考试成绩：");
+                scoreArr[j] = Convert.ToInt32(Console.ReadLine());
+            }
+            Console.Write("输入额外学分：");
+            int credits = Convert.ToInt32(Console.ReadLine()); //获取学分
+            decimal scoreAVG = (decimal)scoreArr.Average(); //获取平均分
+            decimal total = scoreAVG + (credits * (decimal)0.1); //总分 = 平均分 + (学分的10%)
+            string level = Tool.GetLevel(total);
+            Student student = new Student
+            {
+                Name = name,
+                Score = total,
+                Rating = level
+            };
+            studentList.Add(student);
+        }
+        Console.WriteLine("学生姓名\t得分\t评级\n");
+        foreach (var stu in studentList)
+        {
+            Console.WriteLine($"{stu.Name}\t{stu.Score}\t{stu.Rating}");
+        }
+        Console.WriteLine("还需要添加学生信息吗？Y/N");
+        string? letter = Console.ReadLine();
+        if (string.Equals(letter, "Y", StringComparison.OrdinalIgnoreCase)) //判断输入是否为Y
+        {
+
+        }
+    }
+
+    public class Student
+    {
+        public string? Name { get; set; }
+        public decimal Score { get; set; }
+        public string? Rating { get; set; }
     }
 }
